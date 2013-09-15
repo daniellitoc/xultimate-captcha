@@ -37,11 +37,11 @@
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>imageCaptchaFilter</filter-name>
+		<filter-name>localImageCaptchaFilter</filter-name>
 		<url-pattern>/captcha.png</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>audioCaptchaFilter</filter-name>
+		<filter-name>localAudioCaptchaFilter</filter-name>
 		<url-pattern>/audio.wav</url-pattern>
 	</filter-mapping>
 	<filter-mapping>

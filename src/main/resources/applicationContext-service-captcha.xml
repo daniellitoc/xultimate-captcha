@@ -33,8 +33,8 @@
 	
 	<bean id="validator" class="org.danielli.xultimate.captcha.support.StringStringValidator" />
 	<bean id="defaultCaptchaProvider" class="org.danielli.xultimate.captcha.support.RandomWordCaptchaProvider" c:length="4" c:srcChars="ABCDEGHJKLMNRSTUWXY235689" p:validator-ref="validator" />
-	<bean id="imageQuestionHandler" class="org.danielli.xultimate.captcha.image.support.TaobaoQuestionHandlerFactory" />
 	
+	<bean id="imageQuestionHandler" class="org.danielli.xultimate.captcha.image.support.TaobaoQuestionHandlerFactory" />
 	<!-- 
 	
 	<bean id="imageQuestionHandler" class="org.danielli.xultimate.captcha.image.support.GmailQuestionHandlerFactoryBean" />
