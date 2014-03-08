@@ -5,6 +5,7 @@ import java.awt.geom.QuadCurve2D;
 import java.awt.image.BufferedImage;
 
 import org.danielli.xultimate.captcha.image.Glyphs;
+import org.danielli.xultimate.captcha.image.GlyphsDecorator;
 import org.danielli.xultimate.util.math.RandomNumberUtils;
 
 /**

@@ -4,6 +4,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.AffineTransform;
 
 import org.danielli.xultimate.captcha.image.Glyphs;
+import org.danielli.xultimate.captcha.image.GlyphsVisitors;
 import org.danielli.xultimate.util.math.RandomNumberUtils;
 
 /**

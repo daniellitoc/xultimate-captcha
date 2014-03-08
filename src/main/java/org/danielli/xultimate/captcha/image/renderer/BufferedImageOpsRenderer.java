@@ -12,7 +12,7 @@ import org.danielli.xultimate.util.ArrayUtils;
  */
 public class BufferedImageOpsRenderer implements BufferedImageRenderer {
 	
-	private BufferedImageOp[] bufferedImageOps;
+	protected BufferedImageOp[] bufferedImageOps;
 	
 	public BufferedImageOpsRenderer(BufferedImageOp[] bufferedImageOps) {
 		this.bufferedImageOps = bufferedImageOps;

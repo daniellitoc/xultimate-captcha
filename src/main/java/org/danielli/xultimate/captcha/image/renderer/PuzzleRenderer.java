@@ -26,17 +26,17 @@ public class PuzzleRenderer implements BufferedImageRenderer {
 	/**
      * Number of colums to divide the image, max number if rows and colums are managed randomly
      */
-    private int colNum = 6;
+	protected int colNum = 6;
 
     /**
      * Number of rows to divide the image, max number if rows and colums are managed randomly
      */
-    private int rowNum = 4;
+	protected int rowNum = 4;
 
     /**
      * Maximal angle of rotation for each square.
      */
-    private double maxAngleRotation = 0.3;
+	protected double maxAngleRotation = 0.3;
     
     public PuzzleRenderer(int colNum, int rowNum, double maxAngleRotation) {
         this.colNum = colNum;

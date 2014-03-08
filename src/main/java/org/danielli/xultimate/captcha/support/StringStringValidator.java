@@ -2,7 +2,7 @@ package org.danielli.xultimate.captcha.support;
 
 import java.io.Serializable;
 
-import org.danielli.xultimate.captcha.Validator;
+import org.danielli.xultimate.captcha.config.Validator;
 import org.danielli.xultimate.util.StringUtils;
 
 /**
@@ -15,6 +15,11 @@ public class StringStringValidator implements Validator<String, String>, Seriali
 	
 	private static final long serialVersionUID = -3910782779313714291L;
 
+	/** protostuff不能处理没有属性的 */
+	// TODO : 以后看看在说吧，目前只能这样。
+	@SuppressWarnings("unused")
+	private byte value = 0;
+	
 	@Override
 	public boolean validate(String answer, String userAnswer) {
 		return StringUtils.equalsIgnoreCase(answer, userAnswer);

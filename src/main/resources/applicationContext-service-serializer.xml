@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:oxm="http://www.springframework.org/schema/oxm"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+		
+	<util:list id="notSupportClassType" >
+		<value>java.util.Collection</value>
+		<value>java.util.Map</value>
+	</util:list>
+	<bean id="defaultClassTypeNotSupporter" class="org.danielli.xultimate.core.support.DefaultClassTypeNotSupporter" p:notSupportClassTypes-ref="notSupportClassType" />
+	<bean id="stringSerializer" class="org.danielli.xultimate.core.serializer.java.StringSerializer" />
+	<bean id="longSerializer" class="org.danielli.xultimate.core.serializer.java.LongSerializer" />
+	<bean id="integerSerializer" class="org.danielli.xultimate.core.serializer.java.IntegerSerializer" />
+	<bean id="booleanSerializer" class="org.danielli.xultimate.core.serializer.java.BooleanSerializer" />
+	<bean id="dateSerializer" class="org.danielli.xultimate.core.serializer.java.DateSerializer" />
+	<bean id="byteSerializer" class="org.danielli.xultimate.core.serializer.java.ByteSerializer" />
+	<bean id="floatSerializer" class="org.danielli.xultimate.core.serializer.java.FloatSerializer" />
+	<bean id="doubleSerializer" class="org.danielli.xultimate.core.serializer.java.DoubleSerializer" />
+	<bean id="mainProtobufSerializer" class="org.danielli.xultimate.core.serializer.protostuff.MainProtobufSerializer" p:classTypeSupporter-ref="defaultClassTypeNotSupporter" />
+	<bean id="rpcSerializer" class="org.danielli.xultimate.core.serializer.protostuff.RpcProtobufSerializer" />
+	<util:list id="serializers1">
+		<ref bean="stringSerializer" />
+		<ref bean="longSerializer" />
+		<ref bean="integerSerializer" />
+		<ref bean="booleanSerializer" />
+		<ref bean="dateSerializer" />
+		<ref bean="byteSerializer" />
+		<ref bean="floatSerializer" />
+		<ref bean="doubleSerializer" />
+		<ref bean="mainProtobufSerializer"/>
+		<ref bean="rpcSerializer"/>
+	</util:list>
+	<util:list id="deserializers1">
+		<ref bean="stringSerializer" />
+		<ref bean="booleanSerializer" />
+		<ref bean="integerSerializer" />
+		<ref bean="longSerializer" />
+		<ref bean="byteSerializer" />
+		<ref bean="floatSerializer" />
+		<ref bean="doubleSerializer" />
+		<ref bean="dateSerializer" />
+		<ref bean="mainProtobufSerializer"/>
+		<ref bean="rpcSerializer"/>
+	</util:list>
+	<bean id="protobufSerializer" class="org.danielli.xultimate.core.serializer.support.SerializerFactory" p:serializers-ref="serializers1" />
+	<bean id="protobufDeserializer" class="org.danielli.xultimate.core.serializer.support.DeserializerFactory" p:deserializers-ref="deserializers1" />
+
+	<bean id="fastJsonTemplate" class="org.danielli.xultimate.core.json.fastjson.FastJSONTemplate" />
+</beans>

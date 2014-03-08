@@ -6,12 +6,16 @@
 
 package org.danielli.xultimate.captcha.image.decorator;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 
 import org.danielli.xultimate.captcha.image.Glyphs;
+import org.danielli.xultimate.captcha.image.GlyphsDecorator;
 import org.danielli.xultimate.util.math.RandomNumberUtils;
 
 /**

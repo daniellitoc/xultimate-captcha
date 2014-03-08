@@ -3,6 +3,7 @@ package org.danielli.xultimate.captcha.image.visitor;
 import java.awt.geom.Rectangle2D;
 
 import org.danielli.xultimate.captcha.image.Glyphs;
+import org.danielli.xultimate.captcha.image.GlyphsVisitors;
 
 /**
  * @author mag

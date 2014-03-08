@@ -25,7 +25,7 @@ public class ImageFiltersRenderer implements BufferedImageRenderer {
     /**
      * Filters to defrom the image
      */
-	 private ImageFilter[] imageFilters;
+	protected ImageFilter[] imageFilters;
 	 
 	    /**
 	     * Constructor with an array of ImageFilter
