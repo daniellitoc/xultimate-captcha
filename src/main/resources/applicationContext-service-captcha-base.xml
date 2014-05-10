@@ -106,9 +106,9 @@
 	</bean>
 	
 	<bean id="serializingTranscoder" class="org.danielli.xultimate.context.kvStore.memcached.xmemcached.SerializingTranscoder" 
-				p:compressionThreshold="1024"
-				p:baseTypeDeserializer-ref="rpcProtostuffDeserializerProxy"
-				p:baseTypeSerializer-ref="rpcProtostuffSerializerProxy" />
+				p:compressionThreshold="128" p:compressor-ref="snappyJavaCompressor" 
+				p:decompressor-ref="snappyJavaCompressor" p:packZeros="true" 
+				p:rpcSerializer-ref="rpcProtostuffSerializer"  />
 	
 	<bean id="memcachedClient" factory-bean="memcachedClientBuilder" factory-method="build" destroy-method="shutdown" />
   	<bean id="xmemcachedTemplate" class="org.danielli.xultimate.context.kvStore.memcached.xmemcached.support.XMemcachedTemplate" p:memcachedClient-ref="memcachedClient" />

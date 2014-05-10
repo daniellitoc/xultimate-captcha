@@ -26,10 +26,7 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-		
 	<bean id="rpcProtostuffSerializer" class="org.danielli.xultimate.core.serializer.protostuff.RpcProtostuffSerializer" />
-	<bean id="rpcProtostuffSerializerProxy" class="org.danielli.xultimate.core.serializer.support.BaseTypeSerializer" p:checkKnownType="false" p:exportKnownTypeToOutputStream="false" p:packZerosWithoutOutputStream="true" p:serializer-ref="rpcProtostuffSerializer" />
-	<bean id="rpcProtostuffDeserializerProxy" class="org.danielli.xultimate.core.serializer.support.BaseTypeDeserializer" p:checkKnownType="false" p:importKnownTypeFromInputStream="false" p:deserializer-ref="rpcProtostuffSerializer" />
-
-	<bean id="fastJsonTemplate" class="org.danielli.xultimate.core.json.fastjson.FastJSONTemplate" />
+	<util:constant id="snappyJavaCompressor" static-field="org.danielli.xultimate.core.compression.support.SnappyJavaCompressor.COMPRESSOR"  />
+	<util:constant id="fastJSONTemplate" static-field="org.danielli.xultimate.core.json.fastjson.FastJSONTemplate.INSTANCE"/>
 </beans>

@@ -47,9 +47,14 @@ public class ValidatableAnswerHandler<A, UA> implements AnswerHandler<UA> {
 			@Override
 			public Boolean doInXMemcached(MemcachedClient memcachedClient) throws Exception {
 				ValidatableAnswer<A, UA> validatable = memcachedClient.get(captchaId);
-				boolean result = validatable.validateTo(answerDto.getUserAnswer());
+				boolean result = false;
+				A questionAnswer = null;
+				if (validatable != null) {
+					result = validatable.validateTo(answerDto.getUserAnswer());
+					questionAnswer = validatable.getValue();
+				}
 				DateTime currentTime = new DateTime();
-				LOGGER.info("{}||{}||{}||{}||{}", answerDto.getSessionId(), currentTime, answerDto.getUserAnswer(), validatable.getValue(), result);
+				LOGGER.info("{}||{}||{}||{}||{}", answerDto.getSessionId(), currentTime, answerDto.getUserAnswer(), questionAnswer, result);
 				if (result) {
 					memcachedClient.deleteWithNoReply(captchaId);
 				}
