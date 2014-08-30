@@ -118,9 +118,9 @@
 	<bean id="validator" class="org.danielli.xultimate.captcha.support.StringStringValidator" />
 	
 	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" 
-		p:corePoolSize="5" p:queueCapacity="1000" p:maxPoolSize="50" p:keepAliveSeconds="200" p:allowCoreThreadTimeOut="true"
+		p:corePoolSize="8" p:queueCapacity="2048" p:maxPoolSize="12" p:keepAliveSeconds="120" p:allowCoreThreadTimeOut="true"
 		p:daemon="true" p:threadPriority="5" p:threadNamePrefix="mail" 
-		p:awaitTerminationSeconds="10000000" p:waitForTasksToCompleteOnShutdown="true">
+		p:awaitTerminationSeconds="3600" p:waitForTasksToCompleteOnShutdown="true">
 		<property name="rejectedExecutionHandler">
 			<bean class="java.util.concurrent.ThreadPoolExecutor.AbortPolicy" />
 		</property>
