@@ -37,7 +37,7 @@
 		<ref bean="loggerRecordStringCaptchaInterceptor" />
 		<ref bean="browserCacheCaptchaInterceptor" />
 		<bean class="org.danielli.xultimate.captcha.web.interceptor.BufferedImageCaptchaInterceptor" p:questionHandler-ref="taobaoQuestionHandler" />
-		<bean parent="xMemcachedTemplateCaptchaInterceptor" p:keyExpression="#{captchaProperties['image.keyExpression']}" p:replaceExpression="#{captchaProperties['image.replaceExpression']}" />
+		<bean parent="xMemcachedClientCaptchaInterceptor" p:keyExpression="#{captchaProperties['image.keyExpression']}" p:replaceExpression="#{captchaProperties['image.replaceExpression']}" />
 	</util:list>
 	<bean id="imageCaptchaFilter" class="org.danielli.xultimate.captcha.web.filter.CaptchaFilter" p:captchaGenerator-ref="randomWordCaptchaGenerator" p:captchaInterceptors-ref="imageCaptchaInterceptors" />
 	<bean id="imageValidatableAnswerHandler" parent="validatableAnswerHandler" p:keyExpression="#{captchaProperties['image.keyExpression']}" p:replaceExpression="#{captchaProperties['image.replaceExpression']}" />

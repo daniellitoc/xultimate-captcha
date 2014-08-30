@@ -37,7 +37,7 @@
 		<ref bean="loggerRecordStringCaptchaInterceptor"/>
 		<ref bean="browserCacheCaptchaInterceptor" />
 		<bean class="org.danielli.xultimate.captcha.web.interceptor.AudioCaptchaInterceptor" p:questionHandler-ref="audioQuestionHandler" />
-		<bean parent="xMemcachedTemplateCaptchaInterceptor" p:keyExpression="#{captchaProperties['audio.keyExpression']}" p:replaceExpression="#{captchaProperties['audio.replaceExpression']}" />
+		<bean parent="xMemcachedClientCaptchaInterceptor" p:keyExpression="#{captchaProperties['audio.keyExpression']}" p:replaceExpression="#{captchaProperties['audio.replaceExpression']}" />
 	</util:list>
 	<bean id="audioCaptchaFilter" class="org.danielli.xultimate.captcha.web.filter.CaptchaFilter" p:captchaGenerator-ref="numberCaptchaGenerator" p:captchaInterceptors-ref="audioCaptchaInterceptors" />
 

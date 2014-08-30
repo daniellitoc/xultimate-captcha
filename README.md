@@ -59,7 +59,7 @@
 * 默认提供拦截器LoggerRecordStringCaptchaInterceptor\<Q, A\>，记录日志信息，包括identity(所属站点)、sessionId(用户标识，非会话ID)、remoteAddr(客户端IP)、currentTime。
 * 默认提供拦截器BufferedImageCaptchaInterceptor\<Q, A\>，根据sessionid是否存在，发送错误图片或通过QuestionHandler\<Q, BufferedImage\>生成图片发送给客户端。
 * 默认提供拦截器AudioCaptchaInterceptor\<Q, A\>，根据sessionid是否存在，发送错误图片或通过QuestionHandler\<Q, Sample\>生成音频发送给客户端。
-* 默认提供拦截器XMemcachedTemplateCaptchaInterceptor\<Q, A\>，通过验证码ID表达式、替换表达式、格式化器、sessionId生成captchaId作为memcached的key，value使用Answer\<A\>(答案实体域)进行存储。
+* 默认提供拦截器XMemcachedClientCaptchaInterceptor\<Q, A\>，通过验证码ID表达式、替换表达式、格式化器、sessionId生成captchaId作为memcached的key，value使用Answer\<A\>(答案实体域)进行存储。
 * 过滤器和拦截器都是通过Spring配置的方式来定义和提供无状态服务。
 
 

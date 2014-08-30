@@ -3,15 +3,11 @@ package org.danielli.xultimate.captcha.support.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.rubyeye.xmemcached.MemcachedClient;
-
-import org.apache.commons.lang3.BooleanUtils;
 import org.danielli.xultimate.captcha.AnswerHandler;
 import org.danielli.xultimate.captcha.config.AnswerDto;
 import org.danielli.xultimate.captcha.support.ValidatableAnswer;
 import org.danielli.xultimate.context.format.Formatter;
-import org.danielli.xultimate.context.kvStore.memcached.xmemcached.XMemcachedReturnedCallback;
-import org.danielli.xultimate.context.kvStore.memcached.xmemcached.support.XMemcachedTemplate;
+import org.danielli.xultimate.context.kvStore.memcached.xmemcached.XMemcachedClient;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +22,7 @@ import org.slf4j.LoggerFactory;
  */
 public class ValidatableAnswerHandler<A, UA> implements AnswerHandler<UA> {
 
-	protected XMemcachedTemplate xMemcachedTemplate;
+	protected XMemcachedClient xMemcachedClient;
 	
 	/** KEY表达式 */
 	protected String keyExpression;
@@ -39,34 +35,30 @@ public class ValidatableAnswerHandler<A, UA> implements AnswerHandler<UA> {
 	
 	@Override
 	public boolean isValid(final AnswerDto<UA> answerDto) {
-		Map<String, Object> parameter = new HashMap<String, Object>();
-		parameter.put(replaceExpression, answerDto.getSessionId());
-		final String captchaId = formatter.format(keyExpression, parameter);
-		Boolean result = xMemcachedTemplate.execute(new XMemcachedReturnedCallback<Boolean>() {
+		boolean result = false;
+		{
+			Map<String, Object> parameter = new HashMap<String, Object>();
+			parameter.put(replaceExpression, answerDto.getSessionId());
+			String captchaId = formatter.format(keyExpression, parameter);
 			
-			@Override
-			public Boolean doInXMemcached(MemcachedClient memcachedClient) throws Exception {
-				ValidatableAnswer<A, UA> validatable = memcachedClient.get(captchaId);
-				boolean result = false;
-				A questionAnswer = null;
-				if (validatable != null) {
-					result = validatable.validateTo(answerDto.getUserAnswer());
-					questionAnswer = validatable.getValue();
-				}
-				DateTime currentTime = new DateTime();
-				LOGGER.info("{}||{}||{}||{}||{}", answerDto.getSessionId(), currentTime, answerDto.getUserAnswer(), questionAnswer, result);
-				if (result) {
-					memcachedClient.deleteWithNoReply(captchaId);
-				}
-				return result;
+			ValidatableAnswer<A, UA> validatable = xMemcachedClient.get(captchaId);
+			A questionAnswer = null;
+			if (validatable != null) {
+				result = validatable.validateTo(answerDto.getUserAnswer());
+				questionAnswer = validatable.getValue();
 			}
 			
-		});
-		return BooleanUtils.isTrue(result);
+			DateTime currentTime = new DateTime();
+			LOGGER.info("{}||{}||{}||{}||{}", answerDto.getSessionId(), currentTime, answerDto.getUserAnswer(), questionAnswer, result);
+			if (result) {
+				xMemcachedClient.deleteWithNoReply(captchaId);
+			}
+		}
+		return result;
 	}
 
-	public void setxMemcachedTemplate(XMemcachedTemplate xMemcachedTemplate) {
-		this.xMemcachedTemplate = xMemcachedTemplate;
+	public void setxMemcachedClient(XMemcachedClient xMemcachedClient) {
+		this.xMemcachedClient = xMemcachedClient;
 	}
 	
 	/**
